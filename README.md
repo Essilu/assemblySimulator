@@ -90,6 +90,6 @@ starting. From this point on, only code is allowed (i.e., no variable definition
 This is a simple example of a MOD7 assembly file that loads into registers the values of two variables, adds
 them and store the result into a third variable, before halting its execution.
 
-##To:do list
+## To:do list
 
 - [ ] Write a to-do list
