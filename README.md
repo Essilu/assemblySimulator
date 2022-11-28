@@ -79,7 +79,7 @@ Performs a comparison between two values, given by registers, variables or const
 combination is permitted. If the first parameter is smaller than the second parameter, jump to the
 address defined by the label LABEL
 19. JMP *LABEL*
-Jump to the address defined by the label LABEL
+Jump to the address defined by the label LABEL.
 20. HLT
 End the program execution.
 The assembly program follows the given structure:
