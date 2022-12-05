@@ -92,4 +92,8 @@ them and store the result into a third variable, before halting its execution.
 
 ## To:do list
 
-- [ ] Write a to-do list
+- [X] File parsing
+- [ ] Implement the 20 ALU commands
+- [ ] Implement errors
+- [ ] GUI
+ 
