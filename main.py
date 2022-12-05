@@ -1,12 +1,19 @@
-import parser #parser.py
+import parsing #parsing.py
 import memory #memory.py
 
 #Don't start the program before main is called
 if __name__ == '__main__':
-    full_code = parser.import_file("asm_samples/example1.txt")
-    full_code = parser.unclutter(full_code)
 
-    data, code = parser.split_data_code(full_code)
+    #Basic operation before starting execution of the ASM files
+    full_code = parsing.import_file("asm_samples/example1.txt")
+    full_code = parsing.unclutter(full_code)
+    data, code = parsing.split_data_code(full_code)
+    memory.initialize_data(data)
 
-    print(data)
+    #Start execution of the ASM files
+
+    print(memory.variable_dictionnary)
+
     print(code)
+    
+    
