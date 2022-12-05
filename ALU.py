@@ -99,9 +99,27 @@ def SUB(register, variable):
     else:
         print("Error: invalid register") #TODO: implement the errors !
 
+"""DIV function : Divide the value of a register/variable/const to the value of a register"""
+def DIV(register, variable):
+    if register in memory.register_dictionnary:
+        if variable in memory.register_dictionnary:
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[variable] / memory.register_dictionnary[register])
+        elif variable in memory.variable_dictionnary:
+            memory.register_dictionnary[register] = int(memory.variable_dictionnary[variable] / memory.register_dictionnary[register])
+        elif type(variable) == int and variable != 0:
+            memory.register_dictionnary[register] = int(variable / memory.register_dictionnary[register])
+        else:
+            print("Error: invalid variable") #TODO: implement the errors !
+    else:
+        print("Error: invalid register") #TODO: implement the errors !
+
+
+
 memory.stack = [1,2,3,4,5]
-memory.register_dictionnary = {'T0': 7, 'T1': 3, 'T2': 0, 'T3': 0}
-memory.variable_dictionnary = {"A": 5}
+memory.register_dictionnary = {'T0': 2, 'T1': 8, 'T2': 0, 'T3': 0}
+memory.variable_dictionnary = {"A": 7}
+
+
 
 print("memory : " + str(memory.stack))
 print("variable : " + str(memory.variable_dictionnary))
