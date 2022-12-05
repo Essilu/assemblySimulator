@@ -96,4 +96,5 @@ them and store the result into a third variable, before halting its execution.
 - [ ] Implement the 20 ALU commands
 - [ ] Implement errors
 - [ ] GUI
+- [ ] Implement the execution line by line
  
