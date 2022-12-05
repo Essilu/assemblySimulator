@@ -1,10 +1,5 @@
 #PARSING FUNCTIONS
 
-variable_dictionnary = {"T0" : 0,
-                        "T1" : 0,
-                        "T2" : 0,
-                        "T3" : 0,}
-
 #File import
 def import_file(fileName):
     f = open(fileName, 'r')
@@ -30,17 +25,10 @@ def find_code(data):
         if data[i] == "#CODE":
             return i
 
+#Function to split the data and the code to allow for better parsing
 def split_data_code(data):
     code_line = find_code(data)
     code = data[code_line:]
     data = data[:code_line]
     return data, code
 
-    
-test = import_file("asm_samples/example1.txt")
-test = unclutter(test)
-
-data, code = split_data_code(test)
-
-print(data)
-print(code)
