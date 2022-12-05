@@ -12,6 +12,7 @@ if __name__ == '__main__':
 
     #Start execution of the ASM files
 
+    print(memory.register_dictionnary)
     print(memory.variable_dictionnary)
 
     print(code)
