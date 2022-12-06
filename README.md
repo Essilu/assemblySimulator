@@ -93,8 +93,8 @@ them and store the result into a third variable, before halting its execution.
 ## To:do list
 
 - [X] File parsing
-- [ ] Implement the 20 ALU commands
+- [X] Implement the 20 ALU commands
 - [ ] Implement errors
 - [ ] GUI
-- [ ] Implement the execution line by line
- 
+- [X] Implement the execution line by line
+- [ ] Implement the missing instructions

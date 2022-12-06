@@ -1,8 +1,8 @@
 #PARSING FUNCTIONS
 
 #File import
-def import_file(fileName):
-    f = open(fileName, 'r')
+def import_file(file_name):
+    f = open(file_name, 'r')
     data = f.read()
     f.close()
     return data.split('\n')
@@ -28,7 +28,7 @@ def find_code(data):
 #Function to split the data and the code to allow for better parsing
 def split_data_code(data):
     code_line = find_code(data)
-    code = data[code_line:]
+    code = data[code_line+1:]
     data = data[:code_line]
     return data, code
 
