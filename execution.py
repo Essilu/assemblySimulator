@@ -3,11 +3,8 @@ import parsing #parsing.py
 import ALU #ALU.py
 import errors #errors.py
 
-# This part of the program will contain each execution instruction, and will be called by the main.py file
-
 code = []
 data = []
-
 current_line_number = 0
 
 """This function loads the file"""
@@ -17,7 +14,8 @@ def load_file(source_file):
     full_code = parsing.import_file(source_file)
     full_code = parsing.unclutter(full_code)
     data, code = parsing.split_data_code(full_code)
-    memory.initialize_data(data)   
+    memory.initialize_data(data) 
+    memory.label_list = memory.initialize_label_list(code)  
 
 """This function executes the current line dictated by the current_line_number variable"""
 def execute_line():
@@ -71,14 +69,20 @@ def execute_line():
                 ALU.JMP(line[1])
             elif line[0] == "HLT":
                 ALU.HLT()
+            elif line[0] in memory.label_list:
+                pass
         except IndexError as e:
-            print("Missing information at line " + str(current_line_number) + "\n")
+            print("Missing information at line " + str(current_line_number) + " in the code partition.\n")
+            current_line_number = -1
         except errors.InvalidRegister:
-            print("Invalid register at line " + str(current_line_number) + "\n")
+            print("Invalid register at line " + str(current_line_number) + " in the code partition.\n")
+            current_line_number = -1
         except errors.InvalidValue:
-            print("Invalid value at line " + str(current_line_number) + "\n")
+            print("Invalid value at line " + str(current_line_number) + " in the code partition.\n")
+            current_line_number = -1
         except errors.InvalidVariable:
-            print("Invalid variable at line " + str(current_line_number) + "\n")
+            print("Invalid variable at line " + str(current_line_number) + " in the code partition.\n")
+            current_line_number = -1
 
         debug_print()
 
@@ -87,9 +91,18 @@ def next_line():
     global current_line_number
     current_line_number += 1
 
+def full_execution():
+    global current_line_number
+    execute_line()
+    while current_line_number != -1:
+        next_line()
+        execute_line()
+        
+
 """This function helps to debug the program by printing the current state of the program"""
 def debug_print():
     print("Current line number: " + str(current_line_number) + "\n" +
           "Register: " + str(memory.register_dictionnary) + "\n" +
           "Variables : " + str(memory.variable_dictionnary) + "\n" +
+          "Labels : " + str(memory.label_list) + "\n" +
           "Stack : " + str(memory.stack) + "\n")    
