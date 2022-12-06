@@ -7,27 +7,28 @@ import ALU #ALU.py
 code = []
 data = []
 
+current_line_number = 0
+
+"""This function loads the file"""
 def load_file(source_file):
+    global code
     #Basic operation before starting execution of the ASM files
     full_code = parsing.import_file(source_file)
     full_code = parsing.unclutter(full_code)
     data, code = parsing.split_data_code(full_code)
-    memory.initialize_data(data)
+    memory.initialize_data(data)   
 
-    print(code)
-
-
-current_line_number = 0
-
-"""This function take as a parameter 1 line of code, and will execute it"""
+"""This function executes the current line dictated by the current_line_number variable"""
 def execute_line():
 
     global code
     global current_line_number
-
+    
     #Get the current line of code
     line = code[current_line_number]
+    line = line.split()
     
+
     if current_line_number != -1:
         try:
             if line[0] == "LDA":
@@ -72,7 +73,9 @@ def execute_line():
                 ALU.HLT()
         except:
             print("Error: " + line[0] + " is not a valid instruction")
+        debug_print()
 
+"""This function helps to debug the program by printing the current state of the program"""
 def debug_print():
     print("Current line number: " + str(current_line_number) + "\n" +
           "Register: " + str(memory.register_dictionnary) + "\n" +
