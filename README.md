@@ -94,7 +94,11 @@ them and store the result into a third variable, before halting its execution.
 
 - [X] File parsing
 - [X] Implement the 20 ALU commands
+- [ ] Implement the missing instructions AND NOT OR
 - [ ] Implement errors
+- [X] Implement the execution line-by-line
+- [ ] Implement the full execution
+- [ ] Implement file loader
+- [ ] Implement program ending
+
 - [ ] GUI
-- [X] Implement the execution line by line
-- [ ] Implement the missing instructions
