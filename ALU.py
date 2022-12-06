@@ -1,7 +1,9 @@
+import errors #errors.py
+
 # All the 20 instructions required are implemented in this file
 
-#TODO: implement the errors ! (in LDA)
-#TODO: AND, OR, NOT, and jump
+#TODO: implement the errors ! 
+#TODO: Jump
 
 import memory #memory.py
 import execution #execution.py
@@ -12,15 +14,15 @@ def jump(label):
 """LDA function : Load the value of a variable/register/const into the register given
     Format: LDA(register, value)"""
 def LDA(register, value):
-    if register in memory.register_dictionnary:                                #check if the register is valid
-        if type(value) == int:                                              #check if the value is a constant
+    if register in memory.register_dictionnary:                                 #check if the register is valid
+        if type(value) == int:                                                  #check if the value is a constant
             memory.variable_dictionnary[register] = value
         elif value in memory.variable_dictionnary:
             memory.register_dictionnary[register] = memory.variable_dictionnary[value]
         else: 
-            print("Error: invalid value")
+            raise errors.InvalidValue
     else:
-        print("Error: Invalid register")                                    #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """STR function: Store the value of a register/variable into a variable """
 def STR(variable, value):

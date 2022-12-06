@@ -1,6 +1,7 @@
 import memory #memory.py
 import parsing #parsing.py
 import ALU #ALU.py
+import errors #errors.py
 
 # This part of the program will contain each execution instruction, and will be called by the main.py file
 
@@ -70,8 +71,15 @@ def execute_line():
                 ALU.JMP(line[1])
             elif line[0] == "HLT":
                 ALU.HLT()
-        except:
-            print("Error: " + line[0] + " crashed the program.")
+        except IndexError as e:
+            print("Missing information at line " + str(current_line_number) + "\n")
+        except errors.InvalidRegister:
+            print("Invalid register at line " + str(current_line_number) + "\n")
+        except errors.InvalidValue:
+            print("Invalid value at line " + str(current_line_number) + "\n")
+        except errors.InvalidVariable:
+            print("Invalid variable at line " + str(current_line_number) + "\n")
+
         debug_print()
 
 """This function increments the current line number by 1"""
