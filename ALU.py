@@ -16,7 +16,7 @@ def LDA(register, value):
         if type(value) == int:                                              #check if the value is a constant
             memory.variable_dictionnary[register] = value
         elif value in memory.variable_dictionnary:
-            memory.variable_dictionnary[register] = memory.variable_dictionnary[value]
+            memory.register_dictionnary[register] = memory.variable_dictionnary[value]
         else: 
             print("Error: invalid value")
     else:
