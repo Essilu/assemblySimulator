@@ -32,10 +32,9 @@ def STR(variable, value):
         elif value in memory.register_dictionnary:
             memory.variable_dictionnary[variable] = memory.register_dictionnary[value]
         else:
-            print("Error: invalid value")  #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid variable")   #Todo: implement the errors !
-
+        raise errors.InvalidValue
 """PUSH function : Push the value of a register/variable/const onto the stack"""
 def PUSH(register):
     if register in memory.register_dictionnary:
@@ -45,14 +44,14 @@ def PUSH(register):
     elif type(register) == int:
         memory.stack.append(register)
     else:
-        print("Error: invalid input") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """POP function : Pop the value of the top of the stack into a register"""
 def POP(register):
     if register in memory.register_dictionnary:
         memory.register_dictionnary[register] = memory.stack.pop()
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """AND function Performs a logical AND operation between reg1 and a register reg2, a variable var or a constant
 const, and store the result in a register."""
@@ -65,9 +64,9 @@ def AND(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = memory.register_dictionnary[register] & variable
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """OR function Performs a logical OR operation between reg1 and a register reg2, a variable var or a constant and store the result in a register"""
 def OR(register, variable):
@@ -79,16 +78,16 @@ def OR(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = memory.register_dictionnary[register] | variable
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """NOT function Performs a logical NOT operation on a register reg and store the result in a register"""
 def NOT(register):
     if register in memory.register_dictionnary:
         memory.register_dictionnary[register] = ~memory.register_dictionnary[register]
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """ADD function : Add the value of a register/variable/const to the value of a register"""
 def ADD(register, variable):
@@ -100,9 +99,9 @@ def ADD(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) + int(variable)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """SUB function : Substract the value of a register/variable/const to the value of a register"""
 def SUB(register, variable):
@@ -114,9 +113,9 @@ def SUB(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) - int(variable)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """DIV function : Divide the value of a register/variable/const to the value of a register"""
 def DIV(register, variable):
@@ -128,9 +127,9 @@ def DIV(register, variable):
         elif type(variable) == int and variable != 0:
             memory.register_dictionnary[register] = int(int(variable) / int(memory.register_dictionnary[register]))
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """MUL function : Multiply the value of a register/variable/const to the value of a register"""
 def MUL(register, variable):
@@ -142,9 +141,9 @@ def MUL(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) * int(variable)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """MOD function : Modulo the value of a register/variable/const to the value of a register"""
 def MOD(register, variable):
@@ -156,23 +155,23 @@ def MOD(register, variable):
         elif type(variable) == int:
             memory.register_dictionnary[register] = int(variable) % int(memory.register_dictionnary[register])
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """INC function : increment the value of a register"""
 def INC(register):
     if register in memory.register_dictionnary:
         memory.register_dictionnary[register] += 1
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """DEC function : decrement the value of a register"""
 def DEC(register):
     if register in memory.register_dictionnary:
         memory.register_dictionnary[register] -= 1
     else:
-        print("Error: invalid register") #TODO: implement the errors !
+        raise errors.InvalidRegister
 
 """BEQ function : Performs a comparison between two values, given by registers, variables or constants. Any
 combination is permitted. If they are equal, jump to the address defined by the label LABEL"""
@@ -188,7 +187,7 @@ def BEQ(value1, value2, label):
             if memory.register_dictionnary[value1] == value2:
                 jump(label)
         else:
-            print("Error: invalid value") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif value1 in memory.variable_dictionnary:     #If the value1 is a variable : cover all the cases with value2
         if value2 in memory.register_dictionnary:
             if memory.variable_dictionnary[value1] == memory.register_dictionnary[value2]:
@@ -200,7 +199,7 @@ def BEQ(value1, value2, label):
             if memory.variable_dictionnary[value1] == value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif type(value1) == int:
         if value2 in memory.register_dictionnary:
             if value1 == memory.register_dictionnary[value2]:
@@ -212,9 +211,9 @@ def BEQ(value1, value2, label):
             if value1 == value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid variable") #TODO: implement the errors !
+        raise errors.InvalidValue
 
 """BNE function : Performs a comparison between two values, given by registers, variables or constants. Any
 combination is permitted. If they are different, jump to the address defined by the label LABEL"""
@@ -230,7 +229,7 @@ def BNE(value1, value2, label):
             if memory.register_dictionnary[value1] != value2:
                 jump(label)
         else:
-            print("Error: invalid value") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif value1 in memory.variable_dictionnary:     #If the value1 is a variable : cover all the cases with value2
         if value2 in memory.register_dictionnary:
             if memory.variable_dictionnary[value1] != memory.register_dictionnary[value2]:
@@ -242,7 +241,7 @@ def BNE(value1, value2, label):
             if memory.variable_dictionnary[value1] != value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif type(value1) == int:
         if value2 in memory.register_dictionnary:
             if value1 != memory.register_dictionnary[value2]:
@@ -254,9 +253,9 @@ def BNE(value1, value2, label):
             if value1 != value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid variable") #TODO: implement the errors !
+        raise errors.InvalidValue
 
 """BBG function : Performs a comparison between two values, given by registers, variables or constants. Any
 combination is permitted. If the first parameter is bigger than the second parameter, jump to the
@@ -273,7 +272,7 @@ def BBG(value1, value2, label):
             if memory.register_dictionnary[value1] > value2:
                 jump(label)
         else:
-            print("Error: invalid value") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif value1 in memory.variable_dictionnary:     #If the value1 is a variable : cover all the cases with value2
         if value2 in memory.register_dictionnary:
             if memory.variable_dictionnary[value1] > memory.register_dictionnary[value2]:
@@ -285,7 +284,7 @@ def BBG(value1, value2, label):
             if memory.variable_dictionnary[value1] > value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif type(value1) == int:
         if value2 in memory.register_dictionnary:
             if value1 > memory.register_dictionnary[value2]:
@@ -297,9 +296,9 @@ def BBG(value1, value2, label):
             if value1 > value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+           raise errors.InvalidValue
     else:
-        print("Error: invalid variable") #TODO: implement the errors !
+        raise errors.InvalidValue
 
 
 """BSM function : Performs a comparison between two values, given by registers, variables or constants. Any
@@ -317,7 +316,7 @@ def BSM(value1, value2, label):
             if memory.register_dictionnary[value1] < value2:
                 jump(label)
         else:
-            print("Error: invalid value") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif value1 in memory.variable_dictionnary:     #If the value1 is a variable : cover all the cases with value2
         if value2 in memory.register_dictionnary:
             if memory.variable_dictionnary[value1] < memory.register_dictionnary[value2]:
@@ -329,7 +328,7 @@ def BSM(value1, value2, label):
             if memory.variable_dictionnary[value1] < value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     elif type(value1) == int:
         if value2 in memory.register_dictionnary:
             if value1 < memory.register_dictionnary[value2]:
@@ -341,9 +340,9 @@ def BSM(value1, value2, label):
             if value1 < value2:
                 jump(label)
         else:
-            print("Error: invalid variable") #TODO: implement the errors !
+            raise errors.InvalidValue
     else:
-        print("Error: invalid variable") #TODO: implement the errors !
+        raise errors.InvalidValue
 
 """JMP function : Jump to the address defined by the label LABEL"""
 def JMP(label):
