@@ -1,15 +1,12 @@
 import errors #errors.py
-
-# All the 20 instructions required are implemented in this file
-
-#TODO: implement the errors ! 
-#TODO: Jump
-
 import memory #memory.py
 import execution #execution.py
 
+# All the 20 instructions required are implemented in this file
+
 def jump(label):
-    print("jumping to label: ", label)
+    print("Jumping to label " + label)
+    execution.current_line_number = memory.label_list[label]
 
 """LDA function : Load the value of a variable/register/const into the register given
     Format: LDA(register, value)"""
