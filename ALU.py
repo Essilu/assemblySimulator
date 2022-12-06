@@ -1,13 +1,13 @@
 # All the 20 instructions required are implemented in this file
 
-#TODO: implement the errors ! (in LDA, )
-#TODO: AND, OR, NOT
+#TODO: implement the errors ! (in LDA)
+#TODO: AND, OR, NOT, and jump
 
 import memory #memory.py
+import execution #execution.py
 
 def jump(label):
     print("jumping to label: ", label)
-
 
 """LDA function : Load the value of a variable/register/const into the register given
     Format: LDA(register, value)"""
@@ -336,12 +336,6 @@ def JMP(label):
 
 def HLT():
     print("End of program")
+    execution.current_line_number = -1
 
-memory.stack = [1,2,3,4,5]
-memory.register_dictionnary = {'T0': 10, 'T1': 11, 'T2': 0, 'T3': 0}
-memory.variable_dictionnary = {"A": 10}
-
-print("memory : " + str(memory.stack))
-print("variable : " + str(memory.variable_dictionnary))
-print("register : " + str(memory.register_dictionnary)) 
 
