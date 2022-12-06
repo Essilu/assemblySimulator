@@ -27,7 +27,6 @@ def execute_line():
     #Get the current line of code
     line = code[current_line_number]
     line = line.split()
-    
 
     if current_line_number != -1:
         try:
@@ -72,8 +71,13 @@ def execute_line():
             elif line[0] == "HLT":
                 ALU.HLT()
         except:
-            print("Error: " + line[0] + " is not a valid instruction")
+            print("Error: " + line[0] + " crashed the program.")
         debug_print()
+
+"""This function increments the current line number by 1"""
+def next_line():
+    global current_line_number
+    current_line_number += 1
 
 """This function helps to debug the program by printing the current state of the program"""
 def debug_print():

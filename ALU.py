@@ -69,21 +69,34 @@ def AND(register, variable):
 
 """OR function Performs a logical OR operation between reg1 and a register reg2, a variable var or a constant and store the result in a register"""
 def OR(register, variable):
-    pass
+    if register in memory.register_dictionnary:
+        if variable in memory.register_dictionnary:
+            memory.register_dictionnary[register] = memory.register_dictionnary[register] | memory.register_dictionnary[variable]
+        elif variable in memory.variable_dictionnary:
+            memory.register_dictionnary[register] = memory.register_dictionnary[register] | memory.variable_dictionnary[variable]
+        elif type(variable) == int:
+            memory.register_dictionnary[register] = memory.register_dictionnary[register] | variable
+        else:
+            print("Error: invalid variable") #TODO: implement the errors !
+    else:
+        print("Error: invalid register") #TODO: implement the errors !
 
 """NOT function Performs a logical NOT operation on a register reg and store the result in a register"""
 def NOT(register):
-    pass
+    if register in memory.register_dictionnary:
+        memory.register_dictionnary[register] = ~memory.register_dictionnary[register]
+    else:
+        print("Error: invalid register") #TODO: implement the errors !
 
 """ADD function : Add the value of a register/variable/const to the value of a register"""
 def ADD(register, variable):
     if register in memory.register_dictionnary:
         if variable in memory.register_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] + memory.register_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) + int(memory.register_dictionnary[variable])
         elif variable in memory.variable_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] + memory.variable_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) + int(memory.variable_dictionnary[variable])
         elif type(variable) == int:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] + variable
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) + int(variable)
         else:
             print("Error: invalid variable") #TODO: implement the errors !
     else:
@@ -93,11 +106,11 @@ def ADD(register, variable):
 def SUB(register, variable):
     if register in memory.register_dictionnary:
         if variable in memory.register_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] - memory.register_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) - int(memory.register_dictionnary[variable])
         elif variable in memory.variable_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] - memory.variable_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) - int(memory.variable_dictionnary[variable])
         elif type(variable) == int:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] - variable
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) - int(variable)
         else:
             print("Error: invalid variable") #TODO: implement the errors !
     else:
@@ -107,11 +120,11 @@ def SUB(register, variable):
 def DIV(register, variable):
     if register in memory.register_dictionnary:
         if variable in memory.register_dictionnary:
-            memory.register_dictionnary[register] = int(memory.register_dictionnary[variable] / memory.register_dictionnary[register])
+            memory.register_dictionnary[register] = int(int(memory.register_dictionnary[variable]) / int(memory.register_dictionnary[register]))
         elif variable in memory.variable_dictionnary:
-            memory.register_dictionnary[register] = int(memory.variable_dictionnary[variable] / memory.register_dictionnary[register])
+            memory.register_dictionnary[register] = int(int(memory.variable_dictionnary[variable]) / int(memory.register_dictionnary[register]))
         elif type(variable) == int and variable != 0:
-            memory.register_dictionnary[register] = int(variable / memory.register_dictionnary[register])
+            memory.register_dictionnary[register] = int(int(variable) / int(memory.register_dictionnary[register]))
         else:
             print("Error: invalid variable") #TODO: implement the errors !
     else:
@@ -121,11 +134,11 @@ def DIV(register, variable):
 def MUL(register, variable):
     if register in memory.register_dictionnary:
         if variable in memory.register_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] * memory.register_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) * int(memory.register_dictionnary[variable])
         elif variable in memory.variable_dictionnary:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] * memory.variable_dictionnary[variable]
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) * int(memory.variable_dictionnary[variable])
         elif type(variable) == int:
-            memory.register_dictionnary[register] = memory.register_dictionnary[register] * variable
+            memory.register_dictionnary[register] = int(memory.register_dictionnary[register]) * int(variable)
         else:
             print("Error: invalid variable") #TODO: implement the errors !
     else:
@@ -135,11 +148,11 @@ def MUL(register, variable):
 def MOD(register, variable):
     if register in memory.register_dictionnary:
         if variable in memory.register_dictionnary:
-            memory.register_dictionnary[register] =  memory.register_dictionnary[variable] % memory.register_dictionnary[register]
+            memory.register_dictionnary[register] =  int(memory.register_dictionnary[variable]) % int(memory.register_dictionnary[register])
         elif variable in memory.variable_dictionnary:
-            memory.register_dictionnary[register] =  memory.variable_dictionnary[variable] % memory.register_dictionnary[register]
+            memory.register_dictionnary[register] =  int(memory.variable_dictionnary[variable]) % int(memory.register_dictionnary[register])
         elif type(variable) == int:
-            memory.register_dictionnary[register] = variable % memory.register_dictionnary[register]
+            memory.register_dictionnary[register] = int(variable) % int(memory.register_dictionnary[register])
         else:
             print("Error: invalid variable") #TODO: implement the errors !
     else:

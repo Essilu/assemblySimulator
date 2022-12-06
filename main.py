@@ -7,6 +7,11 @@ import execution #execution.py
 execution.load_file("asm_samples/example1.txt")
 
 execution.execute_line()
-    
-    
-    
+execution.next_line()
+execution.execute_line()
+execution.next_line()
+execution.execute_line()
+execution.next_line()
+execution.execute_line()
+execution.next_line()
+execution.execute_line()

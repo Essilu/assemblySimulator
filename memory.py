@@ -18,4 +18,4 @@ def initialize_data(data):
     data = data[1:] #Remove the #data line
     for line in data:
         line = line.split()
-        variable_dictionnary[line[0]] = line[1]
+        variable_dictionnary[line[0]] = int(line[1])
