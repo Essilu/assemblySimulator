@@ -54,46 +54,58 @@ def run():
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
         if event == "LOAD":
-            file_address = values["-IN-"]
-            exec.load_file(file_address)
-            window["-S-"].update(status)
-            exec.current_line_number = 0
-            window["-T0-"].update(0)
-            window["-T1-"].update(0)
-            window["-T2-"].update(0)
-            window["-T3-"].update(0)
-            window["-CODE-"].update(formatter(exec.code))
-            window["-VAR-"].update(formatter(mem.variable_dictionnary))
-            mem.stack = []
-            window["-STACK-"].update(formatter(mem.stack))
-            window["-CNT-"].update(0)
-        if event == "RUN":
-            exec.full_execution()
-        
-            window["-T0-"].update(mem.register_dictionnary["T0"])
-            window["-T1-"].update(mem.register_dictionnary["T1"])
-            window["-T2-"].update(mem.register_dictionnary["T2"])
-            window["-T3-"].update(mem.register_dictionnary["T3"])
-            window["-VAR-"].update(formatter(mem.variable_dictionnary))
-            window["-STACK-"].update(formatter(mem.stack))
-            window["-CNT-"].update("End of program")
-        if event == "STEP":
-            exec.execute_line()
-            if exec.current_line_number != -1:
-                exec.next_line()
-                pg_counter = exec.current_line_number
-                print(pg_counter)
-                window["-CNT-"].update(pg_counter)
-                window["-T0-"].update(mem.register_dictionnary["T0"])
-                window["-T1-"].update(mem.register_dictionnary["T1"])
-                window["-T2-"].update(mem.register_dictionnary["T2"])
-                window["-T3-"].update(mem.register_dictionnary["T3"])
+            try :
+                file_address = values["-IN-"]
+                exec.load_file(file_address)
+                window["-S-"].update(status)
+                exec.current_line_number = 0
+                window["-T0-"].update(0)
+                window["-T1-"].update(0)
+                window["-T2-"].update(0)
+                window["-T3-"].update(0)
+                window["-CODE-"].update(formatter(exec.code))
                 window["-VAR-"].update(formatter(mem.variable_dictionnary))
-                window["-STACK-"].update(formatter(mem.stack))
-            else: 
-                window["-CNT-"].update("End of program")
                 mem.stack = []
-
+                window["-STACK-"].update(formatter(mem.stack))
+                window["-CNT-"].update(0)
+            except:
+                sg.popup("No file selected")
+           
+        if event == "RUN":
+            try:
+                if exec.current_line_number != -1:
+                    exec.full_execution()
+                    window["-T0-"].update(mem.register_dictionnary["T0"])
+                    window["-T1-"].update(mem.register_dictionnary["T1"])
+                    window["-T2-"].update(mem.register_dictionnary["T2"])
+                    window["-T3-"].update(mem.register_dictionnary["T3"])
+                    window["-VAR-"].update(formatter(mem.variable_dictionnary))
+                    window["-STACK-"].update(formatter(mem.stack))
+                    window["-CNT-"].update("End of program")
+                else : 
+                    sg.popup("You need to reload the file to run it again")
+            except:
+                sg.popup("You need to load the file first")
+        if event == "STEP":
+            try:
+                exec.execute_line()
+                if exec.current_line_number != -1:
+                    exec.next_line()
+                    pg_counter = exec.current_line_number
+                    print(pg_counter)
+                    window["-CNT-"].update(pg_counter)
+                    window["-T0-"].update(mem.register_dictionnary["T0"])
+                    window["-T1-"].update(mem.register_dictionnary["T1"])
+                    window["-T2-"].update(mem.register_dictionnary["T2"])
+                    window["-T3-"].update(mem.register_dictionnary["T3"])
+                    window["-VAR-"].update(formatter(mem.variable_dictionnary))
+                    window["-STACK-"].update(formatter(mem.stack))
+                else: 
+                    window["-CNT-"].update("End of program")
+                    mem.stack = []    
+                    sg.popup("You need to reload the file to run it again")
+            except:
+                sg.popup("You need to load the file first")
     
         window.refresh()
     window.close()
