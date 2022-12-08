@@ -1,12 +1,13 @@
 import errors #errors.py
 import memory #memory.py
-import execution #execution.py
+import CPU #execution.py
 
-# All the 20 instructions required are implemented in this file
+# All the 20 instructions required are implemented in this file.
 
+"""JMP function : Jump to a label"""
 def jump(label):
     print("Jumping to label " + label)
-    execution.current_line_number = memory.label_list[label]
+    CPU.current_line_number = memory.label_list[label]
 
 """LDA function : Load the value of a variable/register/const into the register given
     Format: LDA(register, value)"""
@@ -297,7 +298,6 @@ def BBG(value1, value2, label):
     else:
         raise errors.InvalidValue
 
-
 """BSM function : Performs a comparison between two values, given by registers, variables or constants. Any
 combination is permitted. If the first parameter is smaller than the second parameter, jump to the
 address defined by the label LABEL"""
@@ -347,6 +347,4 @@ def JMP(label):
 
 def HLT():
     print("End of program")
-    execution.current_line_number = -1
-
-
+    CPU.current_line_number = -1

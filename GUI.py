@@ -1,17 +1,17 @@
 import PySimpleGUI as sg
-import execution as exec
+import CPU as exec
 import os
 import memory as mem
 
 def run():
     sg.theme('Reddit')   # Add a touch of color
-    working_directory = os.getcwd()
+    working_directory = os.getcwd() #Get the current directory
 
     status = "Status :\n\nFile : Loaded \n\nProgram counter :  "
 
 
 
-
+    # This sets the layout of the window
     layout_1 = [[
         sg.Frame('Assembly Simulator',[[
             sg.Text('Input:'),      
@@ -37,6 +37,7 @@ def run():
         [layout_1,
         layout_2,],  
     ]
+    """This function is used to format the variable and stack sections of the memory, so that it can be displayed in the GUI"""
     def formatter(data):
         data = str(data)
         data = data.replace(',', '\n')
@@ -49,8 +50,10 @@ def run():
 
     window = sg.Window('Assembly simulator 3000', layout)
 
+    """This is the main loop of the program. It will run until the user closes the window or presses the exit button"""
     while True:             # Event Loop
         event, values = window.read()
+        """This part of the code is executed when the user presses the exit button or closes the window"""
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
         if event == "LOAD":
@@ -71,6 +74,7 @@ def run():
             except:
                 sg.popup("No file selected")
            
+        """This part of the code is executed when the user presses the run button. It will execute the whole program."""   
         if event == "RUN":
             try:
                 if exec.current_line_number != -1:
@@ -86,6 +90,7 @@ def run():
                     sg.popup("You need to reload the file to run it again")
             except:
                 sg.popup("You need to load the file first")
+        """This part of the code is executed when the user presses the step button. It will execute one line of the program."""
         if event == "STEP":
             try:
                 exec.execute_line()

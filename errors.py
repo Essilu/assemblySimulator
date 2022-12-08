@@ -9,6 +9,3 @@ class InvalidRegister(Error):
 
 class InvalidValue(Error):
     """Raised when a value is inputted that is not valid"""
-
-class InvalidVariable(Error):
-    """Raised when an operation is inputted that is not valid"""
