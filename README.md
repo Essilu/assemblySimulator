@@ -98,7 +98,7 @@ them and store the result into a third variable, before halting its execution.
 - [X] Implement errors
 - [X] Implement the execution line-by-line
 - [X] Implement the full execution
-- [ ] Implement file loader
+- [X] Implement file loader
 - [X] Implement program ending
 
-- [ ] GUI
+- [X] GUI
